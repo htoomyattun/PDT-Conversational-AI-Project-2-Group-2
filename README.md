@@ -1,4 +1,6 @@
 # SET11124 Machine Learning for Conversational AI
+
+---
 ### Group 2 (Yanchao, Lewis)
 
 | Name                   | ID       |
@@ -11,3 +13,11 @@
 | Abhishek Kodati        | 40710053 |
 | Chirag Jaiswar         | 40685594 |
 
+---
+Step 1 : "rasa train" to train the model.<br />
+Step 2 : "rasa run actions" to run actions file.<br />
+Step 3 : "rasa shell" to start.<br />
+
+*"python discord_bot.py" to start the discord bot server*
+
+---
