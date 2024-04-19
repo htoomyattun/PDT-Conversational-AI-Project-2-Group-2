@@ -1,0 +1,238 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - dissertation_help
+  - student_problem
+  - student_modules
+  - student_interested_domain
+  - thanks
+  - lecture_research_paper
+  - final_thanks
+  - student_fav
+  - student_least_fav
+  - student_int_domain
+  - student_not_int_domain
+  - known_domain
+  - supervisors
+  - about_yanchao
+
+entities:
+  - c
+  - d
+  - e
+  - f
+  - fav_module
+  - least_fav_module
+  - interested_domain
+  - not_interested_domain
+  - known_domain
+  - preferred_domain
+  - person
+  - module_name_0
+  - module_name_1
+  - module_name_2
+  - domain_name_1
+  - domain_name_2
+slots:
+  cn:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: c
+  dn:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: d
+  en:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: e
+  fn:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: f
+  fav_module_slot:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: module_name_1
+  least_fav_module_slot:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: module_name_2
+  interested_domain_slot:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: domain_name_1
+  not_interested_domain_slot:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: domain_name_2
+  known_domain_slot:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: known_domain
+  preferred_domain:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: preferred_domain
+      - type: custom
+  rec_dom_slot:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  supervisor_details_slot:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  supervisor_research_details_slot:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+#  module_name_list:
+#    type: list
+#    influence_conversation: false
+#    mappings:
+#      - type: from_entity
+#        entity: module_name
+
+
+
+
+
+actions:
+  - action_student_modules
+  - action_modules_pw
+  - action_modules_Ml
+  - action_modules_Sd
+  - action_modules_CC
+  - action_student_interested_domain
+  - action_lecture_research_paper
+  - action_fav
+  - action_least_fav
+  - action_not_int_domain
+  - action_int_domain
+  - action_known_domain
+  - action_semantic_analysis_not_interested_domain
+  - action_semantic_analysis_interested_domain
+  - action_semantic_analysis_favourite_module
+  - action_semantic_analysis_not_favourite_module
+  - action_fetch_and_display_lectures
+  - action_fetch_and_display_lectures_research
+  - action_extract_known_domain
+  - action_scrape_yanchao
+  - action_scrape_person_bio
+  - action_testing_names
+  - action_recommend_domain
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "How Can i help you?"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+  utter_dissertation_help:
+    - text: "Sure! What can i help you with it"
+
+  utter_s_p_2:
+    - text: "I understand how daunting it can be to choose a dissertation domain, but I'm here to help you navigate through it."
+
+  utter_student_problem:
+      - text: "What Modules have you completed in your previous trimesters"
+
+  utter_student_modules:
+      - text: "Okay for the below modules how do you rate yourself as 4-Excellent 3-Good 2-Average 1-Not good  \nProgramming for the web"
+
+  utter_modules_pw:
+      - text: "{dn}"
+
+  utter_modules_Ml:
+      - text: "{en}"
+
+  utter_modules_Sd:
+      - text: "{fn}"
+
+  utter_modules_CC:
+      - text: "Okay Do you have any particular module you want to do or you have interested in it?"
+
+  utter_student_intrested_domain:
+      - text: "Okay, \nThese are the lectures who can help you \n Dr Yu, Yanchao \n Dr Ullah, Amjad \n Dr Emilia Sobolewska"
+
+  utter_fav:
+    - text: "From the above modules What's your favourite module"
+  utter_least_fav:
+    - text: "What is you least favourite module?"
+
+  utter_int_domain:
+    - text: "What is your intrested domain?"
+
+  utter_not_domain:
+    - text: "Which domain you are least intrested?"
+
+  utter_student_not_int_domain:
+    - text: "OK, that’s a good point you know which area you are not interested in."
+
+  utter_thanks:
+      - text: "Is there anything you want to know more about these lectures"
+
+  utter_lecture_research_paper:
+      - text: "Dr Yu, Yanchao has sucessfully completed research work on AI-Driven Conversational Storytelling with Humans in Natural Language and Implement 'Right to be forgotten' with machine unlearning  \n \nDr Ullah, Amjad has sucessfully completed research work on Footsteps in the fog: Certificateless fog-based access control and MiCADO-Edge: Towards an Application-level Orchestrator for the Cloud-to-Edge Computing Continuum \n \nDr Emilia Sobolewska has sucessfully completed research work on 21st Century Tapestry: an investigation of smart materials, technology interplay and heritage craftmanship
+     and Learning to Cope with Digital Technology"
+
+  utter_final_thanks:
+      - text: "You're welcome! Remember, I'm here to support you every step of the way. Good luck with your dissertation, and feel free to reach out if you need any more assistance"
+
+  utter_reccomend_domain:
+    - text: "Based on your preferences and interests, I recommend you consider the domain of {rec_dom_slot}."
+
+  utter_supervisors_details:
+    - text: "Supervisors in the domain of {rec_dom_slot}:\n{supervisor_details_slot}"
+
+  utter_supervisors_research_details:
+    - text: "Research Work of Supervisors in the domain of {rec_dom_slot}:\n{supervisor_research_details_slot}"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

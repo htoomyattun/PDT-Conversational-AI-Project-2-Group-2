@@ -1,0 +1,234 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hi ya!
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - good
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+    - I feel bit hectic
+    - hectic
+    - overwhelming
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: dissertation_help
+  examples: |
+    - I need some help for my disseration
+    - dissertation help
+    - help with dissertation
+    - I'm at a crossroads with my dissertation topic selection
+    - I want to talk to you about my dissertation project
+    - I need to talk to you about my dissertation project
+    - dissertation project
+    - I am not sure what to do for my dissertation
+
+- intent: student_problem
+  examples: |
+    - I am not sure about what domain to choose for my dissertation
+    - I am confused in choosing domain for my dissertation
+    - I am not sure about the domain i need to choose for my dissertation
+    - I am not getting any idea for my dissertation
+    - I am not sure about what i need to do for my dissertation
+    - I am not getting any project ideas for my dissertation
+    - I haven't been able to find a specific area of interest or topic for my project.
+    - I'm feeling a bit lost and uncertain about where to even start
+    - I haven’t been able to pinpoint a specific area of interest or topic for my project
+    - I'm not sure which field to focus on
+    - field
+    - topic 
+    - domain
+
+- intent: known_domain
+  examples: |
+    - I want to do my dissertation on [Machine Learning](domain_name) but not sure about which lecture to choose
+    - I have selected my topic [Web Development](domain_name) but i dont know which supervisor to choose for my dissertation.
+    - I would like to know the lectures available in [Artificial intelligence](domain_name) domain
+
+- intent: supervisors
+  examples: |
+    - Yes, I want to know about supervisors
+    - Yes
+    - Supervisors
+
+- intent: student_modules
+  examples: |
+    - I have [Programming for the web](module_name_0), [Machine Learning with conversational AI](module_name_0), [Software Development](module_name_0), [Cloud Computing](module_name_0) modules in my trimesters
+    - [Programming for the web](module_name_0), [Machine Learning with conversational AI](module_name_0), [Software Development](module_name_0), [Cloud Computing](module_name_0)
+
+
+- intent: student_fav
+  examples: |
+    - My favourite Module is [Programming for the web](module_name_1) 
+    - My favourite Module is [Machine Learning with conversational AI](module_name_1)
+    - My favourite Module is [Software Development](module_name_1) 
+    - My favourite Module is [Cloud Computing](module_name_1)
+    - I Love [Programming for the web](module_name_1) 
+    - I Love [Software Development](module_name_1) 
+    - I Like [Programming for the web](module_name_1) 
+    - I Like [Cloud Computing](module_name_1) 
+    - Favourite is [Cloud Computing](module_name_1)
+    - Favourite is [Software Development](module_name_1) 
+
+- intent: student_least_fav
+  examples: |
+    - I am not interested in [Programming for the web](module_name_2) 
+    - I am not interested in [Machine Learning with conversational AI](module_name_2)
+    - I am not interested in [Software Development](module_name_2) 
+    - I am not interested in [Cloud Computing](module_name_2)
+    - I don't Like [Programming for the web](module_name_2) 
+    - I don't Like [Cloud Computing](module_name_2)
+    - My Least Favourite is [Programming for the web](module_name_2) 
+    - My Least Favourite is [Software Development](module_name_2) 
+    
+
+- intent: student_int_domain
+  examples: |
+    - I am interested in [Web Development](domain_name_1) 
+    - I am interested in [Data Science](domain_name_1)
+    - I am interested in [Game design](domain_name_1) 
+    - I am interested in [Robotics](domain_name_1)
+    - I am interested in [Web development](domain_name_1)
+    - I am interested in [Machine Learning](domain_name_1)
+    - I am interested in [Deep Learning](domain_name_1)
+    - I am interested in [Artificial Intelligence](domain_name_1)
+    - I want to explore [Quantum Computing](domain_name_1)
+    - I am very much interested in [Web design](domain_name_1) 
+    - I am very much interested in [Machine Learning](domain_name_1)
+    
+
+- intent: student_not_int_domain
+  examples: |
+    
+    - [Machine Learning](domain_name_2) does not interest me
+    - The domain i am not interested is [Web Development](domain_name_2) 
+    - The domain i am not interested is [Machine Learning](domain_name_2)
+    - The domain i am not interested is [Web Development](domain_name_2) 
+    - The domain i am not interested is [Cloud Engineering](domain_name_2)
+    - The domain i am not interested is [Web development](domain_name_2)
+    - The domain i am not interested is [Machine Learning](domain_name_2)
+    - The domain i am not interested is [Deep Learning](domain_name_2)
+
+- intent: student_interested_domain
+  examples: |
+    - I am thinking like that, too
+    - I am also thinking the same
+    - I wish the same
+    - That's okay for me
+    - yes 
+    - I am ok with the domain
+    - It's Ok for me
+
+
+
+
+- intent: thanks
+  examples: |
+    - Okay Thank you for recommending lectures
+    - okay
+    - Thank you
+    - Thanks
+
+- intent: lecture_research_paper
+  examples: |
+    - Can I know any research papers or projects done by these lectures that can helpful for me
+    - can i know about research work of these lectures
+    - about their reserach work
+    - research work
+
+- intent: final_thanks
+  examples: |
+    - Thank you for the information
+    - Thank you so much for your help!
+
+- intent: about_yanchao
+  examples: |
+    - Tell me about [Yanchao](person)
+    - Who is [gordon](person)?
+    - Information about [Yanchao](person)
+    - I would like to know the biography of [yanchao](person)
+    - About [craig](person)
+    - can i know more about [yanchao](person)

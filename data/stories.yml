@@ -1,0 +1,112 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_happy
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+- story: dissertation_help
+  steps:
+  - intent: dissertation_help
+  - action: utter_dissertation_help
+
+- story: student_problem
+  steps:
+  - intent: student_problem
+  - action: utter_s_p_2
+  - action: utter_student_problem
+
+- story: known_domain
+  steps:
+    - intent: known_domain
+    - action: action_extract_known_domain
+
+- story: supervisors
+  steps:
+    - intent: supervisors
+    - action: action_fetch_and_display_lectures
+
+- story: student_modules
+  steps:
+  - intent: student_modules
+  - action: action_student_modules
+  - action: utter_fav
+
+- story: student_fav
+  steps:
+  - intent: student_fav
+  - action: action_fav
+  - action: utter_least_fav
+
+- story: student_least_fav
+  steps:
+  - intent: student_least_fav
+  - action: action_least_fav
+  - action: utter_int_domain
+
+- story: student_int_domain
+  steps:
+  - intent: student_int_domain
+  - action: action_int_domain
+  - action: utter_not_domain
+
+
+- story: student_not_int_domain
+  steps:
+  - intent: student_not_int_domain
+  - action: utter_student_not_int_domain
+  - action: action_not_int_domain
+  - action: action_testing_names
+  - action: action_recommend_domain
+  - action: utter_reccomend_domain
+
+
+- story: student_interested_domain
+  steps:
+  - intent: student_interested_domain
+  - action: action_fetch_and_display_lectures
+  - action: utter_supervisors_details
+
+- story: thanks
+  steps:
+  - intent: thanks
+  - action: utter_thanks
+
+- story: lecture_research_paper
+  steps:
+  - intent: lecture_research_paper
+  - action: action_fetch_and_display_lectures_research
+  - action: utter_supervisors_research_details
+
+- story: final_thanks
+  steps:
+  - intent: final_thanks
+  - action: utter_final_thanks
+
+- story: about_yanchao
+  steps:
+  - intent: about_yanchao
+  - action: action_scrape_person_bio
