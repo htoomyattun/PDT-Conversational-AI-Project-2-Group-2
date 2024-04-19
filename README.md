@@ -1,6 +1,4 @@
 # SET11124 Machine Learning for Conversational AI
-
----
 ### Group 2 (Yanchao, Lewis)
 
 | Name                   | ID       |
