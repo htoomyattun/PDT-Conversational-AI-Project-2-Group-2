@@ -1,0 +1,43 @@
+version: "3.1"
+stories:
+- story: sad path 1 (.\tests\test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm  # predicted: student_interested_domain: yes
+  - action: utter_happy  # predicted: action_unlikely_intent
+- story: test for dissertation problem (.\tests\test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: student_problem
+  - action: utter_s_p_2  # predicted: action_unlikely_intent
+  - action: utter_student_problem
+  - intent: student_fav  # predicted: student_fav: My favorite module [Programming for web](module_name_1)
+  - action: action_fav
+  - action: utter_least_fav
+  - intent: student_least_fav  # predicted: student_least_fav: I am not intrested in [Machine learning with conversational AI]{"entity": "module_name_2", "value": "Machine Learning with conversational AI"}
+  - action: action_least_fav
+  - action: utter_int_domain
+  - intent: student_int_domain  # predicted: student_least_fav: I am interested in [Software Development](module_name_2)
+  - action: action_int_domain
+  - action: utter_not_domain
+  - intent: student_not_int_domain  # predicted: student_not_int_domain: The domain i am not interested is [Deep Learning](domain_name_2)
+  - action: utter_student_not_int_domain
+  - action: action_not_int_domain
+  - action: action_testing_names
+  - action: action_recommend_domain
+  - action: utter_reccomend_domain
+  - intent: student_interested_domain
+  - action: action_fetch_and_display_lectures
+  - action: utter_supervisors_details
+  - intent: lecture_research_paper
+  - action: action_fetch_and_display_lectures_research
+  - action: utter_supervisors_research_details
+- story: yanchao (.\tests\test_stories.yml)
+  steps:
+  - intent: about_yanchao  # predicted: about_yanchao: [yanchao]{"entity": "person", "value": "Yanchao"}
+  - action: action_scrape_person_bio

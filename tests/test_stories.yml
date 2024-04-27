@@ -89,3 +89,57 @@ stories:
       are you a bot?
     intent: bot_challenge
   - action: utter_iamabot
+
+- story: test for dissertation problem
+  steps:
+  - user: |
+      Hi
+    intent: greet
+  - action: utter_greet
+  - user: |
+      I am confused what domain to choose for the dissertation
+    intent: student_problem
+  - action: utter_s_p_2
+  - action: utter_student_problem
+  - user: |
+      My favorite module Programming for web
+    intent: student_fav
+  - action: action_fav
+  - action: utter_least_fav
+  - user: |
+      I am not intrested in Machine learning with conversational AI
+    intent: student_least_fav
+  - action: action_least_fav
+  - action: utter_int_domain
+  - user: |
+      I am interested in Software Development
+    intent: student_int_domain
+  - action: action_int_domain
+  - action: utter_not_domain
+  - user: |
+      The domain i am not interested is Deep Learning
+    intent: student_not_int_domain
+  - action: utter_student_not_int_domain
+  - action: action_not_int_domain
+  - action: action_testing_names
+  - action: action_recommend_domain
+  - action: utter_reccomend_domain
+  - user: |
+      I am also thinking the same
+    intent: student_interested_domain
+  - action: action_fetch_and_display_lectures
+  - action: utter_supervisors_details
+  - user: |
+      about their reserach work
+    intent: lecture_research_paper
+  - action: action_fetch_and_display_lectures_research
+  - action: utter_supervisors_research_details
+
+
+- story: yanchao
+  steps:
+  - user: |
+      yanchao
+    intent: about_yanchao
+  - action: action_scrape_person_bio
+
