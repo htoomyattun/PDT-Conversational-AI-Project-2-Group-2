@@ -67,6 +67,7 @@ nlu:
     - so so perfect
     - so good
     - so perfect
+    - fine
 
 - intent: mood_unhappy
   examples: |
@@ -100,11 +101,12 @@ nlu:
     - I need some help for my disseration
     - dissertation help
     - help with dissertation
-    - I'm at a crossroads with my dissertation topic selection
+    - I'm at a crossroads with my dissertation domain selection
     - I want to talk to you about my dissertation project
     - I need to talk to you about my dissertation project
     - dissertation project
     - I am not sure what to do for my dissertation
+    - Struggling to finalize my dissertation domain
 
 - intent: student_problem
   examples: |
@@ -118,15 +120,30 @@ nlu:
     - I'm feeling a bit lost and uncertain about where to even start
     - I haven’t been able to pinpoint a specific area of interest or topic for my project
     - I'm not sure which field to focus on
+    - I'm struggling to decide on a topic for my dissertation.
+    - I can't seem to choose a domain for my project.
+    - I need help figuring out domain for my dissertation.
+    - I'm unsure about the area of study I should pursue for my dissertation.
+    - I'm lost when it comes to selecting a domain for my dissertation.
+    - Choosing a domain for my project is proving to be difficult.
+    - I'm having trouble pinning down a dissertation domain.
+    - I'm stuck on what area to focus on for my dissertation.
+    - I don't know what subject to choose for my dissertation.
+    - Finding a suitable dissertation domain is challenging for me.
     - field
     - topic 
     - domain
+    - I'm a bit lost in the dissertation fields, domains and stuff.
+    - I'm having a trouble in deciding dissertation domain.
+    - I would like to get help to get me through my dissertation, like starting from which field should I go for.
+    - I am very uncertaion about how can I find my dissertation topic. 
+    - I am literally stuck in choosing the dissertation topic and domain.  
+    - I have zero ideas how to continue for my dissertation 
+    - Would you be able to guide me for my dissertation
+    - I need guideline for my dissertation
+    - Help me with dissertation please
+    - I am totally screwed in the dissertation, can you help
 
-- intent: known_domain
-  examples: |
-    - I want to do my dissertation on [Machine Learning](domain_name) but not sure about which lecture to choose
-    - I have selected my topic [Web Development](domain_name) but i dont know which supervisor to choose for my dissertation.
-    - I would like to know the lectures available in [Artificial intelligence](domain_name) domain
 
 - intent: supervisors
   examples: |
@@ -134,13 +151,8 @@ nlu:
     - Yes
     - Supervisors
 
-- intent: student_modules
-  examples: |
-    - I have [Programming for the web](module_name_0), [Machine Learning with conversational AI](module_name_0), [Software Development](module_name_0), [Cloud Computing](module_name_0) modules in my trimesters
-    - [Programming for the web](module_name_0), [Machine Learning with conversational AI](module_name_0), [Software Development](module_name_0), [Cloud Computing](module_name_0)
 
-
-- intent: student_fav
+- intent: student_favourite_module
   examples: |
     - My favourite Module is [Programming for the web](module_name_1) 
     - My favourite Module is [Machine Learning with conversational AI](module_name_1)
@@ -152,8 +164,18 @@ nlu:
     - I Like [Cloud Computing](module_name_1) 
     - Favourite is [Cloud Computing](module_name_1)
     - Favourite is [Software Development](module_name_1) 
+    - I enjoy studying [Data Science](module_name_1).
+    - [Artificial Intelligence](module_name_1) is my favourite module.
+    - I'm really into [Cybersecurity](module_name_1).
+    - My top pick is [Network Security](module_name_1).
+    - [Human-Computer Interaction](module_name_1) is my favorite subject.
+    - I'm passionate about [Mobile App Development](module_name_1).
+    - [Quantum Computing](module_name_1) is the module I love the most.
+    - My best module has been [Blockchain Technology](module_name_1).
+    - I always enjoy [Computer Graphics](module_name_1).
+    - My favourite subject has always been [Data Mining](module_name_1).
 
-- intent: student_least_fav
+- intent: student_least_favourite_module
   examples: |
     - I am not interested in [Programming for the web](module_name_2) 
     - I am not interested in [Machine Learning with conversational AI](module_name_2)
@@ -163,9 +185,19 @@ nlu:
     - I don't Like [Cloud Computing](module_name_2)
     - My Least Favourite is [Programming for the web](module_name_2) 
     - My Least Favourite is [Software Development](module_name_2) 
+    - [Data Science](module_name_2) is not my thing.
+    - I dislike [Quantum Computing](module_name_2).
+    - [Network Security](module_name_2) is my least favourite module.
+    - I'm not a fan of [Blockchain Technology](module_name_2).
+    - [Cybersecurity](module_name_2) doesn't appeal to me.
+    - My least favourite module is [Human-Computer Interaction](module_name_2).
+    - [Mobile App Development](module_name_2) is something I'm not into.
+    - I find [Computer Graphics](module_name_2) uninteresting.
+    - [Data Mining](module_name_2) doesn't interest me.
+    - I have little interest in [Artificial Intelligence](module_name_2).
     
 
-- intent: student_int_domain
+- intent: student_interested_domain
   examples: |
     - I am interested in [Web Development](domain_name_1) 
     - I am interested in [Data Science](domain_name_1)
@@ -178,11 +210,20 @@ nlu:
     - I want to explore [Quantum Computing](domain_name_1)
     - I am very much interested in [Web design](domain_name_1) 
     - I am very much interested in [Machine Learning](domain_name_1)
+    - I am keen to study [Blockchain Technology](domain_name_1).
+    - My interest lies in [Network Security](domain_name_1).
+    - I am captivated by [Cybersecurity](domain_name_1).
+    - [Data Science](domain_name_1) fascinates me.
+    - I am eager to delve into [Artificial Intelligence](domain_name_1).
+    - [Web design](domain_name_1) is a field I am interested in.
+    - I have a strong interest in [Cybersecurity](domain_name_1).
+    - Exploring [Blockchain Technology](domain_name_1) is my goal.
+    - I am passionate about [Cloud Computing](domain_name_1).
+    - My curiosity is piqued by [Software Development](domain_name_1).
     
 
-- intent: student_not_int_domain
+- intent: student_not_interested_domain
   examples: |
-    
     - [Machine Learning](domain_name_2) does not interest me
     - The domain i am not interested is [Web Development](domain_name_2) 
     - The domain i am not interested is [Machine Learning](domain_name_2)
@@ -191,8 +232,20 @@ nlu:
     - The domain i am not interested is [Web development](domain_name_2)
     - The domain i am not interested is [Machine Learning](domain_name_2)
     - The domain i am not interested is [Deep Learning](domain_name_2)
+    - I find [Blockchain Technology](domain_name_2) unappealing.
+    - [Network Security](domain_name_2) doesn't capture my interest.
+    - I am not drawn to [Cybersecurity](domain_name_2).
+    - [Cloud Computing](domain_name_2) isn't my cup of tea.
+    - I have no desire to explore [CCloud Computing](domain_name_2).
+    - [Web Design](domain_name_2) is not what I want to pursue.
+    - [Web Design](domain_name_2) doesn't intrigue me.
+    - [Software Development](domain_name_2) is not my field of interest.
+    - I am not keen on [Software Development](domain_name_2).
+    - [Human-Computer Interaction] does not interest me.
 
-- intent: student_interested_domain
+
+
+- intent: student_domain_response
   examples: |
     - I am thinking like that, too
     - I am also thinking the same
@@ -201,7 +254,14 @@ nlu:
     - yes 
     - I am ok with the domain
     - It's Ok for me
-
+    - i like that
+    - its okay fo me
+    - Yeah, I think that's a great idea.
+    - same
+    - that's better
+    - should be fine
+    - would be very great
+    - very nice
 
 
 
@@ -211,6 +271,13 @@ nlu:
     - okay
     - Thank you
     - Thanks
+    - Thanks a million
+    - thank you so much
+    - thanks a lot
+    - thank you very much
+    - appreciate it
+
+
 
 - intent: lecture_research_paper
   examples: |
@@ -223,12 +290,19 @@ nlu:
   examples: |
     - Thank you for the information
     - Thank you so much for your help!
+    - you are my life savior
+    - you are the best thanks  
 
-- intent: about_yanchao
+- intent: about_supervisors
   examples: |
     - Tell me about [Yanchao](person)
     - Who is [gordon](person)?
     - Information about [Yanchao](person)
-    - I would like to know the biography of [yanchao](person)
+    - I would like to know the biography of [lawson](person)
     - About [craig](person)
-    - can i know more about [yanchao](person)
+    - can i know more about [Amir](person)
+    - I would like to know the biography of [zia ulllah](person)
+    - About [amjed ullah](person)
+    - can i know more about [Ahmed](person)
+    - About [John owens](person)
+    - can i know more about [Abdelfateh](person)

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Rasa Core Visualisation</title>
+    <script src="https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js"></script>
+    <script src="https://dagrejs.github.io/project/dagre/latest/dagre.min.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://dagrejs.github.io/project/graphlib-dot/v0.6.3/graphlib-dot.js"></script>
+</head>
+<body>
+<div id="errormsg" style="color: #b00"></div>
+<svg>
+    <style id="graph-style">
+        .node.invisible > rect {
+            display: none;
+        }
+
+        .node.start > rect {
+            fill: #7f7;
+            rx: 30;
+            ry: 18;
+        }
+
+        .node.end > rect {
+            fill: #f77;
+            rx: 30;
+            ry: 18;
+        }
+
+        .node:not(.active) > rect, .node:not(.active) > .label {
+            opacity: 0.4;
+        }
+
+        .edgePath:not(.active) path {
+            opacity: 0.4;
+        }
+
+        .node.ellipsis > rect {
+            fill: #CCC;
+        }
+
+        .node.intent > rect {
+            fill: #7ff;
+        }
+
+        .node.dashed > rect {
+            stroke-dasharray: 5;
+        }
+
+        text {
+            font-weight: 300;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serf, serif;
+            font-size: 14px;
+            color: #1f1d1d;
+        }
+
+        .node rect {
+            stroke: #444;
+            fill: #fff;
+            stroke-width: 1.5px;
+        }
+
+        .edgePath path {
+            stroke: #333;
+            stroke-width: 1.5px;
+        }
+
+        svg {
+            position: fixed;
+            top: 10px;
+            left: 0;
+            height: 100%;
+            width: 100%
+        }
+    </style>
+    <g></g>
+</svg>
+<script>
+
+  function serveGraph() {
+    let oldInputGraphValue;
+
+    const url = 'visualization.dot';
+    const refreshInterval = 500;
+
+    // trigger a refresh by fetching an updated graph
+    setInterval(function () {
+      fetch(url).then(r => r.text()).then(dot => {
+        document.getElementById('errormsg').innerHTML = '';
+        if (oldInputGraphValue === dot) return;
+
+        oldInputGraphValue = dot;
+        drawGraph(dot);
+      }).catch(err => {
+        document.getElementById('errormsg').innerHTML =
+          'Failed to update plot. (' + err.message + ')';
+      });
+    }, refreshInterval);
+  }
+
+  function drawGraph(graph) {
+    let g = graphlibDot.read(graph);
+    // Set margins, if not present
+    if (!g.graph().hasOwnProperty("marginx") &&
+      !g.graph().hasOwnProperty("marginy")) {
+      g.graph().marginx = 20;
+      g.graph().marginy = 20;
+    }
+    g.graph().transition = function (selection) {
+      return selection.transition().duration(300);
+    };
+    // Render the graph into svg g
+    d3.select("svg g").call(render, g);
+  }
+  // Set up zoom support
+  const svg = d3.select("svg"),
+    inner = d3.select("svg g"),
+    zoom = d3.zoom().on("zoom", function () {
+      inner.attr("transform", d3.event.transform);
+    });
+  svg.call(zoom);
+
+  // Create and configure the renderer
+  const render = dagreD3.render();
+
+  let isClient = false;
+  isClient = true;
+
+  if (isClient) {
+    // Mark all nodes and their edges as active
+    cssRules = document.getElementById('graph-style').sheet.cssRules;
+    cssRules[3].style.opacity = 1;
+    cssRules[4].style.opacity = 1;
+
+    let graph;
+    graph = `digraph  {
+0 [class="start active", fillcolor=green, fontsize=12, label=START, style=filled];
+"-1" [class=end, fillcolor=red, fontsize=12, label=END, style=filled];
+1 [class="", fontsize=12, label=utter_greet];
+2 [class="", fontsize=12, label=utter_happy];
+7 [class="", fontsize=12, label=utter_cheer_up];
+8 [class="", fontsize=12, label=utter_did_that_help];
+9 [class="", fontsize=12, label=utter_goodbye];
+11 [class="", fontsize=12, label=utter_happy];
+12 [class="", fontsize=12, label=utter_dissertation_help];
+13 [class="", fontsize=12, label=action_favourite_module];
+14 [class="", fontsize=12, label=utter_least_favourite_module];
+15 [class="", fontsize=12, label=action_least_favourite_module];
+16 [class="", fontsize=12, label=utter_interested_domain];
+17 [class="", fontsize=12, label=action_interested_domain];
+18 [class="", fontsize=12, label=utter_not_interested_domain];
+19 [class="", fontsize=12, label=utter_student_not_interested_domain];
+20 [class="", fontsize=12, label=action_not_interested_domain];
+21 [class="", fontsize=12, label=action_recommend_domain];
+22 [class="", fontsize=12, label=utter_reccomend_domain];
+23 [class="", fontsize=12, label=action_fetch_and_display_lectures];
+24 [class="", fontsize=12, label=utter_supervisors_details];
+25 [class="", fontsize=12, label=action_fetch_and_display_lectures_research];
+26 [class="", fontsize=12, label=utter_supervisors_research_details];
+27 [class="", fontsize=12, label=utter_thanks];
+28 [class="", fontsize=12, label=utter_final_thanks];
+31 [class="", fontsize=12, label=utter_s_p_2];
+50 [class="", fontsize=12, label=action_scrape_person_bio];
+51 [class="", fontsize=12, label="..."];
+54 [class="", fontsize=12, label=utter_iamabot];
+55 [class=intent, fillcolor=lightblue, label=goodmorning, shape=rect, style=filled];
+56 [class=intent, fillcolor=lightblue, label="I am amazing", shape=rect, style=filled];
+57 [class=intent, fillcolor=lightblue, label="I'm so sad", shape=rect, style=filled];
+58 [class=intent, fillcolor=lightblue, label=sad, shape=rect, style=filled];
+59 [class=intent, fillcolor=lightblue, label=wonderful, shape=rect, style=filled];
+60 [class=intent, fillcolor=lightblue, label="that sounds good", shape=rect, style=filled];
+61 [class=intent, fillcolor=lightblue, label=never, shape=rect, style=filled];
+62 [class=intent, fillcolor=lightblue, label="help with dissertation", shape=rect, style=filled];
+63 [class=intent, fillcolor=lightblue, label="I'm unsure about the area of study I should pursue for my dissertation.", shape=rect, style=filled];
+64 [class=intent, fillcolor=lightblue, label="About amjed ullah", shape=rect, style=filled];
+65 [class=intent, fillcolor=lightblue, label="My favourite subject has always been Data Mining.", shape=rect, style=filled];
+66 [class=intent, fillcolor=lightblue, label="My Least Favourite is Programming for the web", shape=rect, style=filled];
+67 [class=intent, fillcolor=lightblue, label="I am interested in Game design", shape=rect, style=filled];
+68 [class=intent, fillcolor=lightblue, label="I find Blockchain Technology unappealing.", shape=rect, style=filled];
+69 [class=intent, fillcolor=lightblue, label="I am also thinking the same", shape=rect, style=filled];
+70 [class=intent, fillcolor=lightblue, label="Can I know any research papers or projects done by these lectures that can helpful for me", shape=rect, style=filled];
+71 [class=intent, fillcolor=lightblue, label="Okay Thank you for recommending lectures", shape=rect, style=filled];
+72 [class=intent, fillcolor=lightblue, label="you are my life savior", shape=rect, style=filled];
+73 [class=intent, fillcolor=lightblue, label="I'm really into Cybersecurity.", shape=rect, style=filled];
+74 [class=intent, fillcolor=lightblue, label="good night", shape=rect, style=filled];
+75 [class=intent, fillcolor=lightblue, label="are you a human?", shape=rect, style=filled];
+0 -> 51  [class="", key=NONE, label=""];
+0 -> 55  [class="", key=0];
+1 -> 56  [class="", key=0];
+1 -> 57  [class="", key=0];
+1 -> 58  [class="", key=0];
+1 -> 59  [class="", key=0];
+2 -> "-1"  [class="", key=NONE, label=""];
+2 -> 60  [class="", key=0];
+7 -> 8  [class="", key=NONE, label=""];
+8 -> 61  [class="", key=0];
+9 -> "-1"  [class="", key=NONE, label=""];
+11 -> 62  [class="", key=0];
+11 -> 63  [class="", key=0];
+11 -> 64  [class="", key=0];
+12 -> 65  [class="", key=0];
+13 -> 14  [class="", key=NONE, label=""];
+14 -> 66  [class="", key=0];
+15 -> 16  [class="", key=NONE, label=""];
+16 -> 67  [class="", key=0];
+17 -> 18  [class="", key=NONE, label=""];
+18 -> 68  [class="", key=0];
+19 -> 20  [class="", key=NONE, label=""];
+20 -> 21  [class="", key=NONE, label=""];
+21 -> 22  [class="", key=NONE, label=""];
+22 -> 69  [class="", key=0];
+23 -> 24  [class="", key=NONE, label=""];
+24 -> 70  [class="", key=0];
+25 -> 26  [class="", key=NONE, label=""];
+26 -> 71  [class="", key=0];
+27 -> 72  [class="", key=0];
+28 -> "-1"  [class="", key=NONE, label=""];
+31 -> 73  [class="", key=0];
+50 -> "-1"  [class="", key=NONE, label=""];
+51 -> 74  [class="", key=0];
+51 -> 75  [class="", key=0];
+54 -> "-1"  [class="", key=NONE, label=""];
+55 -> 1  [class="", key=0];
+56 -> 2  [class="", key=0];
+57 -> 2  [class="", key=0];
+58 -> 7  [class="", key=0];
+59 -> 11  [class="", key=0];
+60 -> 2  [class="", key=0];
+61 -> 9  [class="", key=0];
+62 -> 12  [class="", key=0];
+63 -> 31  [class="", key=0];
+64 -> 50  [class="", key=0];
+65 -> 13  [class="", key=0];
+66 -> 15  [class="", key=0];
+67 -> 17  [class="", key=0];
+68 -> 19  [class="", key=0];
+69 -> 23  [class="", key=0];
+70 -> 25  [class="", key=0];
+71 -> 27  [class="", key=0];
+72 -> 28  [class="", key=0];
+73 -> 13  [class="", key=0];
+74 -> 9  [class="", key=0];
+75 -> 54  [class="", key=0];
+}
+`;
+    drawGraph(graph);
+  } else {
+    serveGraph();
+  }
+
+
+</script>
+</body>
+</html>

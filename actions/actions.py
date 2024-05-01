@@ -60,7 +60,7 @@ class ActionRecommendDomain(Action):
         interested_domain = tracker.get_slot('interested_domain_slot')
         not_interested_domain = tracker.get_slot('not_interested_domain_slot')
 
-        domains = ["Machine Learning", "Web Development", "Cloud Computing", "Software Development", "Deep Learning", "Artificial Intelligence", "Data Science",]
+        domains = ["Machine Learning", "Web Development", "Cloud Computing", "Software Development", "Deep Learning", "Artificial Intelligence", "Data Science","Machine Learning","Computer Networks","Blockchain Technology","Cyber Security","Network Security"]
         if not_interested_domain in domains:
             domains.remove(not_interested_domain)
 
@@ -94,196 +94,6 @@ class ActionRecommendDomain(Action):
 
         return [SlotSet('rec_dom_slot',recommended_domain)]
 
-
-class SemanticAnalysisActionintdom(Action):
-    def name(self):
-        return "action_semantic_analysis_not_favourite_module"
-
-    def __init__(self):
-        self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-        self.model = BertModel.from_pretrained('bert-base-uncased')
-
-    def run(self, dispatcher, tracker, domain):
-        last_message = tracker.latest_message.get('text')
-
-        entity_value = self.extract_entities(last_message)
-
-        slots = [SlotSet("least_fav_module_slot", entity_value)]
-
-        return slots
-
-    def extract_entities(self, text):
-
-        patterns = [
-             r"not interested in \[?([^]]+)\]?",
-                r"i don't like \[?([^]]+)\]?",
-                r"my least favourite is \[?([^]]+)\]?",
-        ]
-
-        for pattern in patterns:
-            match = re.search(pattern, text, re.IGNORECASE)
-            if match:
-                return match.group(1)
-
-        return None
-
-class SemanticAnalysisActionintdom(Action):
-    def name(self):
-        return "action_semantic_analysis_favourite_module"
-
-    def __init__(self):
-        self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-        self.model = BertModel.from_pretrained('bert-base-uncased')
-
-    def run(self, dispatcher, tracker, domain):
-        last_message = tracker.latest_message.get('text')
-
-
-        entity_value = self.extract_entities(last_message)
-
-        slots = [SlotSet("fav_module_slot", entity_value)]
-
-        return slots
-
-    def extract_entities(self, text):
-
-        patterns = [
-            r"my favourite module is \[?([^]]+)\]?",
-            r"i love \[?([^]]+)\]?",
-            r"i like \[?([^]]+)\]?",
-            r"favourite is \[?([^]]+)\]?",
-        ]
-
-        for pattern in patterns:
-            match = re.search(pattern, text, re.IGNORECASE)
-            if match:
-                return match.group(1)
-
-        return None
-
-class SemanticAnalysisActionintdom(Action):
-    def name(self):
-        return "action_semantic_analysis_interested_domain"
-
-    def __init__(self):
-        self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-        self.model = BertModel.from_pretrained('bert-base-uncased')
-
-    def run(self, dispatcher, tracker, domain):
-        last_message = tracker.latest_message.get('text')
-
-        entity_value = self.extract_entities(last_message)
-
-        slots = [SlotSet("interested_domain_slot", entity_value)]
-
-        return slots
-
-    def extract_entities(self, text):
-
-        patterns = [
-            r"interested in \[?([^]]+)\]?",
-            r"i want to explore \[?([^]]+)\]?",
-            r"very much interested in \[?([^]]+)\]?",
-        ]
-
-        for pattern in patterns:
-            match = re.search(pattern, text, re.IGNORECASE)
-            if match:
-                return match.group(1)
-
-        return None
-
-class ActionSemanticAnalysisKnownDomain(Action):
-    def name(self):
-        return "action_extract_known_domain"
-
-    def run(self, dispatcher, tracker, domain):
-        last_message = tracker.latest_message.get('text')
-
-        known_domain_entity = self.extract_known_domain_entity(last_message)
-
-        if known_domain_entity:
-            slots = [SlotSet("preferred_domain", known_domain_entity)]
-            dispatcher.utter_message(text=f"Would you like to know about Supervisors in {known_domain_entity}?")
-        else:
-            dispatcher.utter_message(text="Could you specify which domain you are interested in?")
-            slots = []
-
-        return slots
-
-    def extract_known_domain_entity(self, text):
-        pattern = r"I want to do my dissertation on ([^\,\.]+?)(?: but|,|\.|$)|my topic ([^\,\.]+?)(?: but|,|\.|$)|lectures available in ([^\,\.]+?)(?: but|,|\.|$)"
-
-        matches = re.findall(pattern, text, re.IGNORECASE)
-        matches = [match for sublist in matches for match in sublist if match]
-        if matches:
-            return matches[0]
-
-        return None
-
-
-class SemanticAnalysisAction(Action):
-    def name(self):
-        return "action_semantic_analysis_not_interested_domain"
-
-    def __init__(self):
-        self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-        self.model = BertModel.from_pretrained('bert-base-uncased')
-
-    def run(self, dispatcher, tracker, domain):
-        last_message = tracker.latest_message.get('text')
-
-        entity_value = self.extract_entities(last_message)
-
-        slots = [SlotSet("not_interested_domain_slot", entity_value)]
-        insert_data(tracker.get_slot('cn'), tracker.get_slot('dn'), tracker.get_slot('en'), tracker.get_slot('fn'),
-                    tracker.get_slot('fav_module_slot'), tracker.get_slot('least_fav_module_slot'), tracker.get_slot('interested_domain_slot'), tracker.get_slot('not_interested_domain_slot'))
-
-
-        return slots
-
-    def extract_entities(self, text):
-
-        patterns = [
-            r"not interested in \[?([^]]+)\]?",
-            r"([^]]+) does not interest me",
-            r"not interested is \[?([^]]+)\]?",
-        ]
-
-        for pattern in patterns:
-            match = re.search(pattern, text, re.IGNORECASE)
-            if match:
-                return match.group(1)
-
-        return None
-
-
-class ActionHelloWorld(Action):
-
-     def name(self) -> Text:
-         return "action_student_modules"
-
-     def run(self, dispatcher: CollectingDispatcher,
-             tracker: Tracker,
-             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-         a= next(tracker.get_latest_entity_values('c'),None)
-         b = next(tracker.get_latest_entity_values('d'), None)
-         c = next(tracker.get_latest_entity_values('e'), None)
-         d = next(tracker.get_latest_entity_values('f'), None)
-         l=[]
-         if a:
-             l.append(SlotSet('cn',a))
-         if b:
-             l.append(SlotSet('dn',b))
-         if c:
-             l.append(SlotSet('en',c))
-         if d:
-             l.append(SlotSet('fn',d))
-
-
-
-
-         return l
 
 
 
@@ -335,39 +145,13 @@ class Actionout(Action):
 
         return []
 
-class Actionknowd(Action):
 
-    def name(self) -> Text:
-        return "action_known_domain"
 
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        e = next(tracker.get_latest_entity_values('domain_name'), None)
-        l=[]
-        if e:
-            l.append(SlotSet('known_domain_slot','e'))
-        dispatcher.utter_message(text="Okay These are the lectures")
-        conn = sqlite3.connect('studentdemo.db')
-        cursor = conn.cursor()
-        cursor.execute('''SELECT lecture_1, lecture_2, lecture_3 FROM lecture_test''')
-        lecture_details = cursor.fetchone()
-        f = tracker.get_slot('known_domain_slot')
-        if lecture_details:
-            lecture_1, lecture_2, lecture_3 = lecture_details
-            dispatcher.utter_message(
-                text=f"For a project that intersects {f}, you have some excellent options at our university. \nLecture details: \nLecture 1: {lecture_1}\nLecture 2: {lecture_2}\nLecture 3: {lecture_3}\n")
-        else:
-            dispatcher.utter_message(text="No lecture details found in the database.")
-
-        conn.close()
-
-        return l
 
 class ActionFav(Action):
 
     def name(self) -> Text:
-        return "action_fav"
+        return "action_favourite_module"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -380,7 +164,7 @@ class ActionFav(Action):
 class ActionLeastFav(Action):
 
     def name(self) -> Text:
-        return "action_least_fav"
+        return "action_least_favourite_module"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -394,7 +178,7 @@ class ActionLeastFav(Action):
 class Actionintdom(Action):
 
     def name(self) -> Text:
-        return "action_int_domain"
+        return "action_interested_domain"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -403,12 +187,11 @@ class Actionintdom(Action):
         l=[]
         if e:
             l.append(SlotSet('interested_domain_slot',e))
-        dispatcher.utter_message(response="utter_not_domain")
         return l
 class Actionnotintdom(Action):
 
     def name(self) -> Text:
-        return "action_not_int_domain"
+        return "action_not_interested_domain"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,

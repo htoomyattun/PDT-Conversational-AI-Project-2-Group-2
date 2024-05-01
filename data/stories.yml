@@ -37,12 +37,8 @@ stories:
   steps:
   - intent: student_problem
   - action: utter_s_p_2
-  - action: utter_student_problem
+  - action: utter_favourite_module
 
-- story: known_domain
-  steps:
-    - intent: known_domain
-    - action: action_extract_known_domain
 
 - story: supervisors
   steps:
@@ -53,40 +49,39 @@ stories:
   steps:
   - intent: student_modules
   - action: action_student_modules
-  - action: utter_fav
+  - action: utter_favourite_module
 
-- story: student_fav
+- story: student_favourite_module
   steps:
-  - intent: student_fav
-  - action: action_fav
-  - action: utter_least_fav
+  - intent: student_favourite_module
+  - action: action_favourite_module
+  - action: utter_least_favourite_module
 
-- story: student_least_fav
+- story: student_least_favourite_module
   steps:
-  - intent: student_least_fav
-  - action: action_least_fav
-  - action: utter_int_domain
-
-- story: student_int_domain
-  steps:
-  - intent: student_int_domain
-  - action: action_int_domain
-  - action: utter_not_domain
-
-
-- story: student_not_int_domain
-  steps:
-  - intent: student_not_int_domain
-  - action: utter_student_not_int_domain
-  - action: action_not_int_domain
-  - action: action_testing_names
-  - action: action_recommend_domain
-  - action: utter_reccomend_domain
-
+  - intent: student_least_favourite_module
+  - action: action_least_favourite_module
+  - action: utter_interested_domain
 
 - story: student_interested_domain
   steps:
   - intent: student_interested_domain
+  - action: action_interested_domain
+  - action: utter_not_interested_domain
+
+
+- story: student_not_interested_domain
+  steps:
+  - intent: student_not_interested_domain
+  - action: utter_student_not_interested_domain
+  - action: action_not_interested_domain
+  - action: action_recommend_domain
+  - action: utter_reccomend_domain
+
+
+- story: student_domain_response
+  steps:
+  - intent: student_domain_response
   - action: action_fetch_and_display_lectures
   - action: utter_supervisors_details
 
@@ -106,7 +101,7 @@ stories:
   - intent: final_thanks
   - action: utter_final_thanks
 
-- story: about_yanchao
+- story: about_supervisors
   steps:
-  - intent: about_yanchao
+  - intent: about_supervisors
   - action: action_scrape_person_bio
